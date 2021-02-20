@@ -27,3 +27,7 @@ htmlcov/
 # Direnv
 .envrc
 .direnv
+
+# Trusted sources for Docker
+iam-role-policy.json
+trust.json
