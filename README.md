@@ -37,3 +37,29 @@ Completing the project involves several steps:
 6. Create a CodeBuild stage which will build, test, and deploy your code
 
 For more detail about each of these steps, see the project lesson [here](https://classroom.udacity.com/nanodegrees/nd004/parts/1d842ebf-5b10-4749-9e5e-ef28fe98f173/modules/ac13842f-c841-4c1a-b284-b47899f4613d/lessons/becb2dac-c108-4143-8f6c-11b30413e28d/concepts/092cdb35-28f7-4145-b6e6-6278b8dd7527).
+
+## Helpful questions that helped
+
+### Issue: KubectlAssumeRoleCustomResource gets stuck in CREATE_IN_PROGRESS state
+
+See https://knowledge.udacity.com/questions/298434 for adjusting the headers
+of the CI config file.  You Need adjust link 158:
+```
+s/
+headers = {'content-type': '', "content-length": len(response_body) }
+/
+headers = {'content-type': '', "content-length": str(len(response_body)) }
+/
+```
+
+### Issue: Build Failure: error: You must be logged in to the server (the server has asked for the client to provide credentials)
+
+See https://knowledge.udacity.com/questions/285613, for adding:
+```
+  – groups:
+    – system:masters
+    rolearn: arn:aws:iam::<YOUR_ACCOUNT_ID>:role/UdacityFlaskDeployCBKubectlRole
+    username: build
+```
+to the aws-auth-path.yaml.  That will properly provide access to the role on
+AWS.
