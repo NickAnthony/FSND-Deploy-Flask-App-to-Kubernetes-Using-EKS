@@ -1,3 +1,24 @@
+# AWS Deployed Flask APP
+
+The running service is available at:
+`a988355b9c840414db48480adff529c5-1553512072.us-east-2.elb.amazonaws.com`
+the name is: `simple-jwt-api`
+
+## Basic test
+
+The following will run a basic test of the deployed API.
+
+1. Post an email/password combo to the service
+```
+  export TOKEN=`curl -d '{"email":"no-reply@gmail.com","password":"veryspecialpassword"}' -H "Content-Type: application/json" -X POST a988355b9c840414db48480adff529c5-1553512072.us-east-2.elb.amazonaws.com/auth  | jq -r '.token'`
+```
+
+2. Get that email back
+```
+    curl --request GET 'a988355b9c840414db48480adff529c5-1553512072.us-east-2.elb.amazonaws.com/contents' -H "Authorization: Bearer ${TOKEN}" | jq
+```
+
+
 # Deploying a Flask API
 
 This is the project starter repo for the fourth course in the [Udacity Full Stack Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004): Server Deployment, Containerization, and Testing.
