@@ -38,3 +38,12 @@ def test_auth(client):
     assert response.status_code == 200
     token = response.json['token']
     assert token is not None
+
+def test_bad_request(client):
+    body = {'email': EMAIL,
+            'password': PASSWORD}
+    response = client.get('/auth',
+                           data=json.dumps(body),
+                           content_type='application/json')
+
+    assert response.status_code == 200
